@@ -58,3 +58,30 @@ class ArbolBinario:
         def _inorden(nodo):
             return _inorden(nodo.izquierda) + [nodo.valor] + _inorden(nodo.derecha) if nodo else []
         return _inorden(self.raiz)
+
+    def superparent(self, x, z):
+        def encontrar_nodo(nodo, valor):
+            if nodo is None:
+                return None
+            if nodo.valor == valor:
+                return nodo
+            elif valor < nodo.valor:
+                return encontrar_nodo(nodo.izquierda, valor)
+            else:
+                return encontrar_nodo(nodo.derecha, valor)
+
+        def es_descendiente(nodo, valor):
+            if nodo is None:
+                return False
+            if nodo.valor == valor:
+                return True
+            elif valor < nodo.valor:
+                return es_descendiente(nodo.izquierda, valor)
+            else:
+                return es_descendiente(nodo.derecha, valor)
+
+        nodo_x = encontrar_nodo(self.raiz, x)
+        if nodo_x is None:
+            return False
+        return es_descendiente(nodo_x, z)
+

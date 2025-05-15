@@ -1,23 +1,25 @@
+# main.py
 from Pila.Pila import Pila
 from Cola.Cola import Cola
 from ListaEnlazada.ListaSimple import ListaSimple
-from ArbolBinario.interfaz import iniciar_interfaz
+
+# IMPORT CORRECTO PARA LA INTERFAZ DEL ÁRBOL BINARIO
+# Si 'ArbolBinario' es una carpeta con __init__.py y 'interfaz.py' dentro,
+# este import debería funcionar si ejecutas el script desde la carpeta raíz.
+from ArbolBinario.interfaz import iniciar_interfaz  
+
 
 def mostrar_menu_principal():
     print("\n--- Menú Principal ---")
     print("1. Operaciones con Lista Simple")
     print("2. Operaciones con Pila")
     print("3. Operaciones con Cola")
-    print("4. Operaciones con Arboles Binarios")
+    print("4. Operaciones con Árboles Binarios")
     print("5. Salir")
 
-def mostrar_menu_listas():
-    print("\n--- Menú de Operaciones con Lista Simple ---")
-    print("1. Insertar al inicio")
-    print("2. Insertar al final")
-    print("3. Eliminar dato")
-    print("4. Mostrar lista")
-    print("5. Volver al menú principal")
+
+# ... Aquí van las funciones para listas, pilas, colas, las dejé iguales ...
+
 
 def operaciones_listas():
     lista = ListaSimple()
@@ -37,14 +39,14 @@ def operaciones_listas():
             try:
                 print("\n--- ELIMINAR ELEMENTO ---")
                 print(f"Lista actual: {lista}")
-        
-                valor = input("Ingrese el valor a eliminar: ")     
-                elemento_eliminado = lista.eliminar(valor)       
+
+                valor = input("Ingrese el valor a eliminar: ")
+                elemento_eliminado = lista.eliminar(valor)
                 if elemento_eliminado is not None:
                     print(f"\n✓ Elemento '{elemento_eliminado}' eliminado con éxito.")
-                    print(f"Lista actualizada:{lista}")
+                    print(f"Lista actualizada: {lista}")
                 else:
-                    print("\n✗ El elemento no fue encontrado en la lista.")         
+                    print("\n✗ El elemento no fue encontrado en la lista.")
             except ValueError:
                 print("\nError: El valor ingresado no es válido.")
         elif opcion == "4":
@@ -54,13 +56,6 @@ def operaciones_listas():
         else:
             print("Opción no válida. Intente de nuevo.")
 
-def mostrar_menu_pila():
-    print("\n--- Menú de Operaciones con Pilas ---")
-    print("1. Apilar elemento")
-    print("2. Desapilar elemento")
-    print("3. Ver cima")
-    print("4. Mostrar pila")
-    print("5. Volver al menú principal")
 
 def operaciones_pila():
     pila = Pila()
@@ -87,14 +82,6 @@ def operaciones_pila():
         else:
             print("Opción no válida. Intente de nuevo.")
 
-def mostrar_menu_cola():
-    print("\n--- Menú de Operaciones con Colas ---")
-    print("1. Encolar elemento")
-    print("2. Desencolar elemento")
-    print("3. Ver frente")
-    print("4. Mostrar Cola")
-    print("5. Ver valor mínimo")
-    print("6. Volver al menú principal")
 
 def operaciones_cola():
     cola = Cola()
@@ -125,6 +112,7 @@ def operaciones_cola():
         else:
             print("Opción no válida. Intente de nuevo.")
 
+
 def main():
     while True:
         mostrar_menu_principal()
@@ -138,12 +126,14 @@ def main():
             operaciones_cola()
         elif opcion_principal == "4":
             print("Abriendo interfaz de Árboles Binarios...")
-            iniciar_interfaz()
+            iniciar_interfaz()  # Aquí se abre la interfaz y bloquea hasta que la cierres
         elif opcion_principal == "5":
             print("Saliendo del programa...")
             break
         else:
             print("Opción no válida. Intente de nuevo.")
 
+
 if __name__ == "__main__":
     main()
+

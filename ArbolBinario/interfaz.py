@@ -1,6 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox
-from .arbol_binario import ArbolBinario
+from tkinter import messagebox, simpledialog
+from .arbol_binario import ArbolBinario  # Asegúrate que esta ruta relativa sea correcta, si no, prueba sin el punto.
 
 
 class AppArbol:
@@ -19,6 +19,7 @@ class AppArbol:
         tk.Button(botones, text="Buscar", command=self.buscar).pack(side=tk.LEFT, padx=5)
         tk.Button(botones, text="Eliminar", command=self.eliminar).pack(side=tk.LEFT, padx=5)
         tk.Button(botones, text="Mostrar Inorden", command=self.mostrar_inorden).pack(side=tk.LEFT, padx=5)
+        tk.Button(botones, text="Superparent", command=self.superparent_dialog).pack(side=tk.LEFT, padx=5)
 
         self.canvas = tk.Canvas(root, width=600, height=400, bg="white")
         self.canvas.pack(pady=10)
@@ -78,11 +79,20 @@ class AppArbol:
             self.canvas.create_line(x, y + radio, x_der, y_der - radio)
             self.dibujar_nodo(nodo.derecha, x_der, y_der, espaciado // 2)
 
+    def superparent_dialog(self):
+        x = simpledialog.askinteger("Superparent", "Introduce el valor de x (superparent):", parent=self.root)
+        if x is None:
+            return
+        z = simpledialog.askinteger("Superparent", "Introduce el valor de z (posible descendiente):", parent=self.root)
+        if z is None:
+            return
+
+        resultado = self.arbol.superparent(x, z)
+        msg = f"¿{x} es superparent de {z}? {'Sí' if resultado else 'No'}"
+        messagebox.showinfo("Resultado Superparent", msg)
+
+
 def iniciar_interfaz():
     root = tk.Tk()
     app = AppArbol(root)
     root.mainloop()
-
-if __name__ == "__main__":
-    iniciar_interfaz()
-

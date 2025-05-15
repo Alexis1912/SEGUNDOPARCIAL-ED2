@@ -93,7 +93,8 @@ def mostrar_menu_cola():
     print("2. Desencolar elemento")
     print("3. Ver frente")
     print("4. Mostrar Cola")
-    print("5. Volver al menú principal")
+    print("5. Ver valor mínimo")
+    print("6. Volver al menú principal")
 
 def operaciones_cola():
     cola = Cola()
@@ -116,6 +117,10 @@ def operaciones_cola():
         elif opcion == "4":
             cola.mostrar_cola()
         elif opcion == "5":
+            minimo = cola.minimo()
+            if minimo is not None:
+                print(f"El valor mínimo en la cola es: {minimo}")
+        elif opcion == "6":
             break
         else:
             print("Opción no válida. Intente de nuevo.")
